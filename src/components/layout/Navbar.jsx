@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState } from "react";
 import { FaSearch, FaBell, FaUserCircle, FaCog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -241,7 +241,7 @@ function Navbar({ onSearch }) {
   );
 }
 
-=======
+
 import React, { useState } from "react";
 import { FaSearch, FaBell, FaUserCircle, FaCog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -484,5 +484,4 @@ function Navbar({ onSearch }) {
   );
 }
 
->>>>>>> d41df5b306612acc83a1c46b7b8706d731875a34
 export default Navbar;
