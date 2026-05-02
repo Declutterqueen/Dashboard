@@ -29,9 +29,9 @@ export default function ProposalType() {
     Low: "#22c55e",
   };
 
-  const filteredProposals =
+   const filteredProposals =
     filter === "All"
-      ? proposalData
+       ? proposalData
       : proposalData.filter((p) => p.status === filter);
 
   return (
@@ -39,11 +39,12 @@ export default function ProposalType() {
       style={{
         padding: "30px",
         minHeight: "100vh",
-        background: "linear-gradient(180deg,rgb(15, 23, 42)",
+       background: "linear-gradient(180deg, rgb(15, 23, 42), rgb(15, 23, 42))",
         fontFamily: "Segoe UI, sans-serif",
+        textShadow: "0 0 20px rgba(99,102,241,0.4)"
       }}
     >
-      {/* Header */}
+     
       <div style={{ textAlign: "center", marginBottom: "35px" }}>
         <h2
           style={{
@@ -61,7 +62,7 @@ export default function ProposalType() {
         </p>
       </div>
 
-      {/* Filters */}
+   
       <div style={{ textAlign: "center", marginBottom: "30px" }}>
         {["All", "Active", "Pending", "Completed"].map((status) => (
           <button
@@ -88,7 +89,7 @@ export default function ProposalType() {
         ))}
       </div>
 
-      {/* Cards */}
+     
       <div
         style={{
           display: "grid",
@@ -96,25 +97,33 @@ export default function ProposalType() {
           gap: "25px",
         }}
       >
-        {filteredProposals.map((p) => (
+      
+       {filteredProposals.map((p) => (
           <div
             key={p.id}
-            style={{
-              background: "linear-gradient(180deg,rgb(15, 23, 42)",
-              borderRadius: "16px",
-              padding: "20px",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.4)",
-              transition: "all 0.3s ease",
-              cursor: "pointer",
-              border: "1px solid #1f2937",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "translateY(-8px)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.transform = "translateY(0px)")
-            }
-          >
+           style={{
+  background: "linear-gradient(145deg, #0f172a, #111c33)",
+  borderRadius: "18px",
+  padding: "20px",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.45)",
+  transition: "all 0.3s ease",
+  cursor: "pointer",
+  border: "1px solid rgba(99,102,241,0.15)",
+}}
+          onMouseEnter={(e) => {
+  e.currentTarget.style.transform = "translateY(-10px)";
+  e.currentTarget.style.boxShadow = "0 18px 45px rgba(99,102,241,0.25)";
+  e.currentTarget.style.border = "1px solid rgba(99,102,241,0.4)";
+}}
+
+onMouseLeave={(e) => {
+  e.currentTarget.style.transform = "translateY(0)";
+  e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.45)";
+  e.currentTarget.style.border = "1px solid rgba(99,102,241,0.15)";
+}}
+          > 
+  
+  
             <h3
               style={{
                 marginBottom: "12px",
@@ -154,6 +163,7 @@ export default function ProposalType() {
                   fontWeight: "600",
                   color: "#fff",
                   backgroundColor: priorityColors[p.priority],
+    
                 }}
               >
                 {p.priority} Priority

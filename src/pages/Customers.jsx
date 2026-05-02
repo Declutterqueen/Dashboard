@@ -1,5 +1,4 @@
 
-
 // src/pages/Customers.jsx
 import React, { useState } from "react";
 import { FiUser, FiMail, FiMapPin, FiBriefcase } from "react-icons/fi";
@@ -33,20 +32,18 @@ export default function Customers() {
       fontFamily: "Segoe UI, sans-serif"
     }}>
 
-      {/* Title */}
       <h2 style={{
         textAlign: "center",
-        fontSize: "38px",
+        fontSize: "40px",
         fontWeight: "700",
         marginBottom: "30px",
         background: "linear-gradient(90deg, #6366f1, #48bdec, #4715fa)",
         WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent"
+        WebkitTextFillColor: "transparent",
       }}>
         Customer Directory
       </h2>
 
-      {/* Filters */}
       <div style={{ textAlign: "center", marginBottom: "25px" }}>
         {["All", "Active", "Inactive", "Pending"].map(status => (
           <button
@@ -70,26 +67,34 @@ export default function Customers() {
         ))}
       </div>
 
-      {/* Cards */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))",
         gap: "25px"
       }}>
         {filteredCustomers.map(c => (
-          <div key={c.id}
-            style={{
-              background: "linear-gradient(180deg,rgb(15, 23, 42), rgb(15, 23, 42))",
-              borderRadius: "18px",
-              padding: "20px",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.5)",
-              border: "1px solid #1f2937",
-              transition: "0.3s",
-              cursor: "pointer"
-            }}
-            onMouseEnter={e => e.currentTarget.style.transform = "translateY(-8px)"}
-            onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
-          >
+          <div
+  key={c.id}
+  style={{
+    background: "linear-gradient(145deg, #0f172a, #111c33)",
+    borderRadius: "18px",
+    padding: "20px",
+    border: "1px solid rgba(99,102,241,0.15)",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.45)",
+    transition: "all 0.3s ease",
+    cursor: "pointer",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "translateY(-10px)";
+    e.currentTarget.style.boxShadow = "0 18px 40px rgba(99,102,241,0.2)";
+    e.currentTarget.style.border = "1px solid rgba(99,102,241,0.4)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "translateY(0)";
+    e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.45)";
+    e.currentTarget.style.border = "1px solid rgba(99,102,241,0.15)";
+  }}
+>
             <h3 style={{ color: "#fff", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
               <FiUser /> {c.name}
             </h3>
@@ -104,18 +109,19 @@ export default function Customers() {
               <FiMapPin /> {c.city}
             </p>
 
-            <p style={{
-              marginTop: "10px",
-              fontWeight: "600",
-              color:
-                c.subscription === "Premium"
-                  ? "#6366f1"
-                  : c.subscription === "Standard"
-                  ? "#0ea5e9"
-                  : "#facc15"
-            }}>
-              {c.subscription} Plan
-            </p>
+          <p style={{
+  marginTop: "10px",
+  fontWeight: "600",
+  letterSpacing: "0.5px",
+  color:
+    c.subscription === "Premium"
+      ? "#6366f1"
+      : c.subscription === "Standard"
+      ? "#0ea5e9"
+      : "#facc15"
+}}>
+  ✦ {c.subscription} Plan
+</p>
 
             <span style={{
               display: "inline-block",
@@ -134,7 +140,4 @@ export default function Customers() {
       </div>
     </div>
   );
-
-
-
 }

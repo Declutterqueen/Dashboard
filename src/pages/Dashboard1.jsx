@@ -1,5 +1,6 @@
+
 // src/pages/Dashboard.jsx
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/layout/Sidebar.jsx";
 import Navbar from "../components/layout/Navbar.jsx";
 import DataTable from "../components/table/DataTable.jsx";
@@ -7,17 +8,12 @@ import RevenueChart from "../components/charts/RevenueChart.jsx";
 import UserChart from "../components/charts/UserChart.jsx";
 import Users from "./Users.jsx";
 import Settings from "./Settings.jsx";
-import { FiMessageCircle } from "react-icons/fi";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
-import {
-  FiDollarSign,
-  FiUsers,
-  FiShoppingCart,
-  FiBarChart2,
-  FiTrendingUp,
-} from "react-icons/fi";
+import { FiDollarSign, FiUsers, FiShoppingCart, FiBarChart2, FiTrendingUp } from "react-icons/fi";
 import "../styles/dashboard.css";
+import { useContext } from "react";
 import { SettingsContext } from "../context/SettingsContext.jsx";
+
 
 
 // ---------------- Mini Chart Data ----------------
@@ -31,9 +27,11 @@ const miniChartData = [
   { value: 55 },
 ];
 
-// ---------------- Summary Card ----------------
+
+
 function SummaryCard({ title, value, icon }) {
   return (
+
     <div
       className="summary-card"
       style={{
@@ -48,11 +46,12 @@ function SummaryCard({ title, value, icon }) {
         gap: "6px",
       }}
     >
+      {/* Top Row: Icon + Title */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "8px",
+          gap: "8px",      // 👈 icon & text ke beech gap
           color: "#94a3b8",
           fontSize: "14px",
           fontWeight: "500",
@@ -62,6 +61,7 @@ function SummaryCard({ title, value, icon }) {
         <span>{title}</span>
       </div>
 
+      {/* Value */}
       <div
         style={{
           color: "#fff",
@@ -69,17 +69,11 @@ function SummaryCard({ title, value, icon }) {
           fontWeight: "bold",
         }}
       >
-        {value}
 
+        {value}
         <ResponsiveContainer width="100%" height={40}>
           <LineChart data={miniChartData}>
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke="#3bafcc"
-              strokeWidth={2}
-              dot={false}
-            />
+            <Line type="monotone" dataKey="value" stroke="#3bafcc" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -87,7 +81,7 @@ function SummaryCard({ title, value, icon }) {
   );
 }
 
-// ---------------- Circular Timer ----------------
+// ---------------- Big Circular Progress ----------------
 function CircularTimerCard({ totalSeconds = 155 }) {
   const [time, setTime] = useState(totalSeconds);
   const [isRunning, setIsRunning] = useState(false);
@@ -98,22 +92,26 @@ function CircularTimerCard({ totalSeconds = 155 }) {
 
   useEffect(() => {
     if (!isRunning) return;
-    const interval = setInterval(() => {
-      setTime((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
+    const interval = setInterval(() => setTime(prev => (prev > 0 ? prev - 1 : 0)), 1000);
     return () => clearInterval(interval);
   }, [isRunning]);
 
   const togglePlay = () => setIsRunning(!isRunning);
-
   const minutes = String(Math.floor(time / 60)).padStart(2, "0");
   const seconds = String(time % 60).padStart(2, "0");
 
+
+
+
+
+
+
+  
   return (
     <div className="carbon-card circular-card">
       <span className="card-title">Work Session Progress</span>
-
       <div className="circle-wrapper">
+
         <svg width="160" height="160">
           <defs>
             <linearGradient id="circleGradient" x1="0" y1="0" x2="1" y2="1">
@@ -123,13 +121,22 @@ function CircularTimerCard({ totalSeconds = 155 }) {
             </linearGradient>
           </defs>
 
-          <circle cx="80" cy="80" r={radius} stroke="#262626" strokeWidth="12" fill="none" />
-
+          {/* Background Circle */}
           <circle
             cx="80"
             cy="80"
             r={radius}
-            stroke="url(#circleGradient)"
+            stroke="#262626"
+            strokeWidth="12"
+            fill="none"
+          />
+
+          {/* Progress Circle with Gradient */}
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            stroke="url(#circleGradient)"   // 👈 Gradient applied
             strokeWidth="12"
             fill="none"
             strokeDasharray={circumference}
@@ -138,10 +145,9 @@ function CircularTimerCard({ totalSeconds = 155 }) {
             style={{ transition: "0.5s ease" }}
           />
         </svg>
-
         <div className="circle-content">
           {minutes}:{seconds}
-
+          <br />
           <button
             onClick={togglePlay}
             style={{
@@ -165,35 +171,9 @@ function CircularTimerCard({ totalSeconds = 155 }) {
 
 // ---------------- Main Dashboard ----------------
 function Dashboard() {
+  const [currentPage, setCurrentPage] = useState("Dashboard");
 
-const [chatOpen, setChatOpen] = useState(false);
-const [messages, setMessages] = useState([
-  { role: "bot", text: "Hi 👋 I’m your AI Assistant. How can I help you?" }
-]);
-const [input, setInput] = useState("");
-const sendMessage = () => {
-  if (!input.trim()) return;
-
-  const newMessages = [
-    ...messages,
-    { role: "user", text: input },
-    {
-      role: "bot",
-      text: "I’m a demo assistant 🤖 — I can’t connect to API yet, but I can guide you through your dashboard!"
-    }
-  ];
-
-  setMessages(newMessages);
-  setInput("");
-};
-
-
-
-
-
-  const [currentPage] = useState("Dashboard");
-  const { settings } = useContext(SettingsContext);
-
+   const { settings } = useContext(SettingsContext);
   const summaryData = [
     { title: "Total Sales", value: "$58,000", icon: <FiDollarSign /> },
     { title: "Total Visitors", value: "12,500", icon: <FiUsers /> },
@@ -202,168 +182,89 @@ const sendMessage = () => {
     { title: "Trends", value: "15%", icon: <FiTrendingUp /> },
   ];
 
-  // ---------------- NEWS STATE (FIXED LOCATION) ----------------
-  const [activeNews, setActiveNews] = useState(0);
-
-  const newsData = [
-    {
-      title: "Revenue Growth Increased",
-      desc: "Your dashboard revenue increased by 12% this week.",
-      time: "2h ago",
-    },
-    {
-      title: "New Users Spike",
-      desc: "User registrations are rising due to campaign.",
-      time: "5h ago",
-    },
-    {
-      title: "System Update Completed",
-      desc: "Performance improvements deployed successfully.",
-      time: "1d ago",
-    },
-  ];
-
-  // ---------------- AUTO ROTATE NEWS ----------------
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveNews((prev) => (prev + 1) % newsData.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [newsData.length]);
-
   return (
+
     <div className="main-content-wrapper">
       <div className="main-content">
 
         {currentPage === "Dashboard" && (
           <>
+    
             {/* Top row cards */}
             <div className="summary-cards-row flex flex-wrap gap-2">
               {summaryData.map((card) => (
-                <SummaryCard
-                  key={card.title}
-                  title={card.title}
-                  value={card.value}
-                  icon={card.icon}
-                />
+                <SummaryCard key={card.title} title={card.title} value={card.value} icon={card.icon} />
               ))}
             </div>
 
-
-
             {/* Charts Section */}
             <div className="charts-section mt-4 flex gap-4 flex-wrap">
-              <div
-                className="charts-card carbon-card"
-                style={{ flex: 1, width: "90%" }}
-              >
+              <div className="charts-card carbon-card" style={{ flex: 1, width: "90%" }}>
                 <RevenueChart />
               </div>
             </div>
 
-
-
-{/* 🔥 LIVE NEWS SECTION (FIXED) */}
-            <div className="news-section">
-
-              <h3 className="section-title">Real-time Updates</h3>
-
-              <div className="news-live-card">
-
-                <h4>{newsData[activeNews].title}</h4>
-                <p>{newsData[activeNews].desc}</p>
-                <span>{newsData[activeNews].time}</span>
-
-                <div className="news-controls">
-
-                  <button
-                    onClick={() =>
-                      setActiveNews((prev) =>
-                        prev === 0 ? newsData.length - 1 : prev - 1
-                      )
-                    }
-                  >
-                    Prev
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setActiveNews((prev) => (prev + 1) % newsData.length)
-                    }
-                  >
-                    Next
-                  </button>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-
-
             <div className="usergrowth-progress-row">
 
+              {/* 70% Chart */}
               <div className="usergrowth-chart">
                 <UserChart />
               </div>
 
+              {/* 30% Circular */}
               <div className="usergrowth-circular">
                 <CircularTimerCard totalSeconds={155} />
               </div>
 
+
+
+
+           {/* 🔥 LIVE NEWS SECTION */}
+<div className="news-section">
+
+  <h3 className="section-title">Live Insights</h3>
+
+  <div className="news-live-card">
+
+    <h4>{newsData[activeNews].title}</h4>
+
+    <p>{newsData[activeNews].desc}</p>
+
+    <span>{newsData[activeNews].time}</span>
+
+    <div className="news-controls">
+
+      <button onClick={() =>
+        setActiveNews((prev) =>
+          prev === 0 ? newsData.length - 1 : prev - 1
+        )
+      }>
+        Prev
+      </button>
+
+      <button onClick={() =>
+        setActiveNews((prev) => (prev + 1) % newsData.length)
+      }>
+        Next
+      </button>
+
+    </div>
+
+  </div>
+
             </div>
-
-
           </>
         )}
 
         {currentPage === "Users" && <Users />}
         {currentPage === "Settings" && <Settings />}
-
       </div>
-  <div className="ai-fab" onClick={() => setChatOpen(true)}>
-  <FiMessageCircle />
- 
-</div>
-{chatOpen && (
-  <div className="ai-chatbox">
-    
-    {/* Header */}
-    <div className="ai-header">
-      <span>🤖 AI Assistant</span>
-      <button onClick={() => setChatOpen(false)}>✖</button>
     </div>
-
-    {/* Messages */}
-    <div className="ai-messages">
-      {messages.map((msg, i) => (
-        <div
-          key={i}
-          className={msg.role === "user" ? "msg user" : "msg bot"}
-        >
-          {msg.text}
-        </div>
-      ))}
-    </div>
-
-    {/* Input */}
-    <div className="ai-input">
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Ask something..."
-      />
-      <button onClick={sendMessage}>Send</button>
-    </div>
-
-  </div>
-)}
-    </div>
+    //  </div>
   );
 }
+
+
 
 
 export default Dashboard;

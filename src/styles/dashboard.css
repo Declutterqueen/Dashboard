@@ -1371,8 +1371,142 @@ input:checked + .slider:before {
 }
 
 
+/* Floating Button */
+.ai-fab {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
 
+.ai-fab:hover {
+  transform: scale(1.1);
+}
 
+/* Chatbox */
+.ai-chatbox {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  width: 320px;
+  height: 420px;
+  background: #0f172a;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Header */
+.ai-header {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ai-header button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Messages */
+.ai-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Message bubbles */
+.msg {
+  max-width: 75%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.msg.bot {
+  background: #1e293b;
+  color: #e2e8f0;
+  align-self: flex-start;
+}
+
+.msg.user {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  align-self: flex-end;
+}
+
+/* Input */
+.ai-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #1e293b;
+  gap: 8px;
+}
+
+.ai-input input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #1e293b;
+  color: white;
+  font-size: 13px;
+}
+
+.ai-input button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.ai-input button:hover {
+  opacity: 0.9;
+}
+
+/* Smooth animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 /* ---------------- Media Queries ---------------- */
 @media (max-width: 1024px) {
   .sidebar {
@@ -1435,7 +1569,225 @@ input:checked + .slider:before {
 }
 
 
+.login-success-card {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: slideIn 0.4s ease;
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
+
+
+
+
+
+
+
+.news-live-card {
+  background: #112036;
+  padding: 16px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.news-live-card h4 {
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.news-live-card p {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.news-live-card span {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.news-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.news-controls button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #1f2937;
+  color: white;
+  font-size: 12px;
+}
+
+.news-controls button:hover {
+  background: #334155;
+}
+
+/* =========================
+   MOBILE RESPONSIVE FIXES
+   ========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .summary-cards-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .usergrowth-progress-row {
+    flex-direction: column;
+  }
+
+  .usergrowth-chart,
+  .usergrowth-circular {
+    flex: 1;
+  }
+
+  .charts-card {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  /* prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* main layout */
+  .main-content {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  /* sidebar becomes top (or hidden if you want later) */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  /* cards stack */
+  .summary-cards-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .summary-card {
+    width: 100% !important;
+    height: auto;
+  }
+
+  /* charts stack */
+  .charts-section {
+    gap: 15px;
+  }
+
+  .charts-card {
+    width: 100% !important;
+  }
+
+  /* user growth section */
+  .usergrowth-progress-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .usergrowth-chart,
+  .usergrowth-circular {
+    flex: 1;
+    width: 100%;
+  }
+
+  /* circular chart smaller */
+  .circle-wrapper svg {
+    width: 140px;
+    height: 140px;
+  }
+
+  .circle-content {
+    font-size: 16px;
+  }
+
+  /* news section */
+  .news-live-card {
+    width: 100%;
+  }
+}
+
+/* Small mobile phones */
+@media (max-width: 480px) {
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .summary-card {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .card-value {
+    font-size: 18px;
+  }
+
+  .circle-wrapper svg {
+    width: 120px;
+    height: 120px;
+  }
+
+  .circle-content {
+    font-size: 14px;
+  }
+
+  .news-live-card h4 {
+    font-size: 13px;
+  }
+
+  .news-live-card p {
+    font-size: 11px;
+  }
+
+  .news-controls button {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
 
 

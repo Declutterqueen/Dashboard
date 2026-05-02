@@ -5,6 +5,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+// import { Cursor } from "recharts/types/component/Cursor";
 
 // Fix default marker icon issue with React Leaflet + Vite
 delete L.Icon.Default.prototype._getIconUrl;
@@ -58,7 +59,7 @@ export default function Locations() {
       style={{
         padding: "30px",
         minHeight: "100vh",
-        background: "linear-gradient(180deg,rgb(15, 23, 42)",
+      background: "linear-gradient(180deg, rgb(15, 23, 42), rgb(15, 23, 42))",
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
@@ -66,12 +67,12 @@ export default function Locations() {
       <h2
         style={{
           textAlign: "center",
-          fontSize: "38px",
-          fontWeight: "700",
-          marginBottom: "35px",
-          background: "linear-gradient(90deg, #6366f1, #48bdec, #4715fa)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
+        fontSize: "40px",
+        fontWeight: "700",
+        marginBottom: "30px",
+        background: "linear-gradient(90deg, #6366f1, #48bdec, #4715fa)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
         }}
       >
         Locations
@@ -141,13 +142,22 @@ export default function Locations() {
           <tbody>
             {locationsData.map((l) => (
               <tr
-                key={l.id}
-                style={{
-                  background: "#172138",
-                  borderRadius: "12px",
-                  marginBottom: "10px",
-                }}
-              >
+  key={l.id}
+  style={{
+    background: "linear-gradient(145deg, #0f172a, #111c33)",
+    borderRadius: "14px",
+    boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
+    transition: "all 0.3s ease",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "scale(1.01)";
+    e.currentTarget.style.boxShadow = "0 10px 25px rgba(99,102,241,0.2)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "scale(1)";
+    e.currentTarget.style.boxShadow = "0 6px 18px rgba(0,0,0,0.4)";
+  }}
+>
                 <td style={tdStyle}>{l.id}</td>
                 <td style={tdStyle}>{l.name}</td>
                 <td style={tdStyle}>{l.city}</td>
@@ -177,7 +187,8 @@ const thStyle = {
 
 const tdStyle = {
   padding: "14px 18px",
+  borderBottom: "1px solid rgba(255,255,255,0.05)"
+};
 
 
 
-}

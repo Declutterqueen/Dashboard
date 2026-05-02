@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 body {
   margin: 0;
@@ -241,7 +241,7 @@ input:checked + .slider:before {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
 }
-=======
+
 
 body {
   margin: 0;
@@ -484,4 +484,3 @@ input:checked + .slider:before {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
 }
->>>>>>> d41df5b306612acc83a1c46b7b8706d731875a34

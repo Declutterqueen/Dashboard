@@ -66,5 +66,3 @@ function UserChart() {
 }
 
 export default UserChart;
-
-

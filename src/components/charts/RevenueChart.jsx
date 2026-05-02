@@ -61,6 +61,5 @@ function RevenueChart() {
   );
 }
 
-
-
+export default RevenueChart;
 

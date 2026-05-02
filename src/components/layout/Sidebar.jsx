@@ -77,35 +77,70 @@ export default function Sidebar() {
       >
         {menuItems.map((item, index) => (
           <li key={item.title}>
-            <NavLink
+            {/*<NavLink
               to={item.path}
-              style={({ isActive }) => ({
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "12px 16px",
-                borderRadius: "10px",
-                color: "#caccd1",
-                fontWeight: "500",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-                background: isActive
-                  ? "linear-gradient(90deg,#6366f1,#48bdec)"
-                  : hovered === index
-                  ? "#1e293b"
-                  : "transparent",
-                transform:
-                  hovered === index ? "translateX(5px)" : "translateX(0)",
-                boxShadow: isActive
+               style={({ isActive }) => ({
+                 display: "flex",
+                 alignItems: "center",
+                 gap: "12px",
+                 padding: "12px 16px",
+                 borderRadius: "10px",
+                 color: "#caccd1",
+                 fontWeight: "500",
+                 textDecoration: "none",
+                 transition: "all 0.3s ease",
+                 background: isActive
+                   ? "linear-gradient(90deg,#6366f1,#48bdec)"
+                   : hovered === index
+                   ? "#1e293b"
+              : "transparent",
+                 transform:
+                   hovered === index ? "translateX(5px)" : "translateX(0)",
+                 boxShadow: isActive
                   ? "0 4px 12px rgba(99, 101, 241, 0.69)"
                   : "none",
               })}
+    
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
               <span style={{ fontSize: "18px" }}>{item.icon}</span>
               <span style={{ fontSize: "16px" }}>{item.title}</span>
-            </NavLink>
+            </NavLink>*/}
+            <NavLink
+  to={item.path}
+  style={({ isActive }) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    padding: "12px 16px",
+    borderRadius: "10px",
+    textDecoration: "none",
+    position: "relative",
+    transition: "all 0.3s ease",
+
+    color: isActive ? "#fff" : "#caccd1",
+    background: isActive ? "rgba(99,102,241,0.15)" : "transparent",
+    transform: isActive ? "translateX(6px)" : "translateX(0)",
+  })}
+>
+  
+  {/* 🔵 Active indicator (simple safe version) */}
+  <span
+    style={{
+      position: "absolute",
+      left: "0",
+      top: "8px",
+      bottom: "8px",
+      width: "4px",
+      borderRadius: "10px",
+      background: "transparent",
+    }}
+  />
+
+  <span style={{ fontSize: "18px" }}>{item.icon}</span>
+  <span style={{ fontSize: "16px" }}>{item.title}</span>
+</NavLink>
           </li>
         ))}
       </ul>
